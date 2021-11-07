@@ -30,7 +30,7 @@ The example below demonstrates the basic usage of the `SparseLasso` module.
 import pandas as pd
 import numpy as np
 from sklearn.datasets import make_regression
-from sklearn import linear_model
+from sklearn.linear_model import LassoCV
 
 # import SparseLasso
 from sparse_lasso import SparseLassoCV
@@ -44,10 +44,14 @@ X, y, coef = make_regression(n_samples=1000,
                              random_state=0)
 
 # estimate standard LassoCV with optimal lambda minimizing error
-lasso_min = linear_model.LassoCV(n_alphas=100, cv=10).fit(X=X, y=y)
+lasso_min = LassoCV(n_alphas=100, cv=10).fit(X=X, y=y)
 
 # estimate SparseLassoCV with lambda using 1 standard error rule
-lasso_1se = SparseLassoCV(n_alphas=100, cv=10).fit(X=X, y=y) 
+lasso_1se = SparseLassoCV(n_alphas=100, cv=10).fit(X=X, y=y)
+
+# compare the penalty values
+print('Lasso Min Penalty: ', round(lasso_min.alpha_, 2), '\n',
+      'Lasso 1se Penalty: ', round(lasso_1se.alpha, 2), '\n')
 
 # compare the number of selected features
 print('Lasso Min Number of Selected Variables:     ',

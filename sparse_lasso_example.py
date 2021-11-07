@@ -34,7 +34,11 @@ X, y, coef = make_regression(n_samples=1000,
 lasso_min = linear_model.LassoCV(n_alphas=100, cv=10).fit(X=X, y=y)
 
 # estimate SparseLassoCV with lambda using 1 standard error rule
-lasso_1se = SparseLassoCV(n_alphas=100, cv=10).fit(X=X, y=y) 
+lasso_1se = SparseLassoCV(n_alphas=100, cv=10).fit(X=X, y=y)
+
+# compare the penalty values
+print('Lasso Min Penalty: ', round(lasso_min.alpha_, 2), '\n',
+      'Lasso 1se Penalty: ', round(lasso_1se.alpha, 2), '\n')
 
 # get the number of non-zero coefficients and save the output
 print('Lasso Min Number of Selected Variables:     ',
@@ -78,6 +82,10 @@ lasso_1se = SparseLogisticRegressionCV(penalty='l1',
                                        solver='liblinear',
                                        Cs=100,
                                        cv=10).fit(X=X, y=y)
+
+# compare the penalty values
+print('Lasso Min Penalty: ', round(lasso_min.C_[0], 2), '\n',
+      'Lasso 1se Penalty: ', round(lasso_1se.C, 2), '\n')
         
 # get the number of non-zero coefficients and save the output
 print('Lasso Min Number of Selected Variables:     ',
