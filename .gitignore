@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# custom
+.DS_Store
+
+# pdf files
+*.pdf
+
+# graphic files
+*.png
+*.jpeg
+*.jpg
+
+# data files
+*.csv
+
+# R comparisons
+R/
+*.Rhistory
